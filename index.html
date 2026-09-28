@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahim Lazar — Portfolio BTS SIO SISR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-global.css">
+<style>
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #070b0f;
+  padding: 8rem 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,191,174,.1) 0%, transparent 60%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+.hero-glow-2 {
+  position: absolute;
+  width: 600px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(67,97,238,.08) 0%, transparent 65%);
+  bottom: -80px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.hero-line-top {
+  position: absolute;
+  top: 2.5rem; left: 2rem; right: 2rem;
+  height: 1px;
+  background: rgba(255,255,255,.06);
+}
+.hero-line-top::after {
+  content: 'Portfolio · BTS SIO SISR · 2026';
+  position: absolute; right: 0; top: -9px;
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  color: rgba(255,255,255,.22);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .45rem 1.1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(0,191,174,.35);
+  background: rgba(0,191,174,.08);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--teal);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 2.4rem;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: blink 1.6s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  color: white;
+  line-height: .93;
+  letter-spacing: -.03em;
+  margin-bottom: 1.8rem;
+}
+.hero-name em { color: var(--teal); font-style: italic; }
+
+.hero-tagline {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255,255,255,.78);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto 3rem;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  gap: .9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary-hero {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .95rem 2.4rem;
+  border-radius: 6px;
+  background: var(--teal);
+  color: #070b0f;
+  font-weight: 700; font-size: .9rem;
+  letter-spacing: .04em; text-transform: uppercase;
+  text-decoration: none;
+  transition: all .25s var(--ease);
+  box-shadow: 0 6px 30px rgba(0,191,174,.3);
+}
+.btn-primary-hero:hover {
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,191,174,.2);
+}
+
+.btn-ghost-hero {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .95rem 1.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.78);
+  font-size: .9rem; font-weight: 500;
+  text-decoration: none;
+  transition: all .25s var(--ease);
+}
+.btn-ghost-hero:hover {
+  border-color: rgba(255,255,255,.5);
+  color: white;
+  background: rgba(255,255,255,.06);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .45rem;
+  color: rgba(255,255,255,.25);
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+  animation: floatScroll 2.8s ease-in-out infinite;
+}
+@keyframes floatScroll {
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-7px)}
+}
+
+/* ══ SECTIONS ══ */
+.sections-nav {
+  padding: 6rem 0 8rem;
+  background: #f7f9fb;
+}
+
+.sn-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.sn-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: .6rem;
+  font-weight: 400;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.sn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.sn-item {
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem 2rem 2rem;
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e8edf3;
+  text-decoration: none;
+  transition: all .3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.sn-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.1);
+  border-color: transparent;
+}
+.sn-item:hover .sn-icon-wrap {
+  transform: scale(1.1) rotate(-4deg);
+}
+
+.sn-icon-wrap {
+  width: 58px; height: 58px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  transition: transform .3s var(--ease);
+  flex-shrink: 0;
+}
+.ic-teal   { background: #e0faf8; box-shadow: 0 0 0 5px rgba(0,191,174,.07); }
+.ic-indigo { background: #eaedff; box-shadow: 0 0 0 5px rgba(67,97,238,.07); }
+.ic-amber  { background: #fff8e6; box-shadow: 0 0 0 5px rgba(245,158,11,.07); }
+.ic-rose   { background: #fdecea; box-shadow: 0 0 0 5px rgba(232,96,76,.07); }
+.ic-violet { background: #f3efff; box-shadow: 0 0 0 5px rgba(139,92,246,.07); }
+.ic-sky    { background: #e6f6fe; box-shadow: 0 0 0 5px rgba(14,165,233,.07); }
+.ic-green  { background: #e8f8ee; box-shadow: 0 0 0 5px rgba(34,197,94,.07); }
+
+.sn-num {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  color: #b8c2cf;
+  letter-spacing: .1em;
+  margin-bottom: .7rem;
+}
+.sn-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin-bottom: .5rem;
+  line-height: 1.2;
+}
+.sn-item p {
+  font-size: .87rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 1.6rem;
+}
+
+.sn-link {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-size: .82rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  transition: gap .2s;
+}
+.sn-item:hover .sn-link { gap: .75rem; }
+.link-teal   { color: #00bfae; }
+.link-indigo { color: #4361ee; }
+.link-amber  { color: #d97706; }
+.link-rose   { color: #e8604c; }
+.link-violet { color: #8b5cf6; }
+.link-sky    { color: #0ea5e9; }
+.link-green  { color: #16a34a; }
+
+.sn-item::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s var(--ease);
+}
+.sn-item:nth-child(1)::before { background: #00bfae; }
+.sn-item:nth-child(2)::before { background: #4361ee; }
+.sn-item:nth-child(3)::before { background: #d97706; }
+.sn-item:nth-child(4)::before { background: #16a34a; }
+.sn-item:nth-child(5)::before { background: #e8604c; }
+.sn-item:nth-child(6)::before { background: #8b5cf6; }
+.sn-item:nth-child(7)::before { background: #0ea5e9; }
+.sn-item:hover::before { transform: scaleX(1); }
+
+@media(max-width:1024px) { .sn-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:640px) {
+  .hero-name { font-size: 3rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .sn-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-line-top"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge reveal">
+      <span class="hero-badge-dot"></span>
+      Disponible pour alternance 2026
+    </div>
+
+    <h1 class="hero-name reveal d1">Brahim <em>Lazar</em></h1>
+
+    <p class="hero-tagline reveal d2">
+      Diplômé d'un BTS SIO option SISR, passionné par les systèmes, les réseaux
+      et la sécurité des infrastructures. Bienvenue sur mon portfolio.
+    </p>
+
+    <div class="hero-actions reveal d3">
+      <a href="projets.html" class="btn-primary-hero">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Voir mes projets
+      </a>
+      <a href="CV_BL_2026.pdf" target="_blank" class="btn-ghost-hero">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        CV
+      </a>
+      <a href="tableau_synthese_brahim_lazar.xlsx" target="_blank" class="btn-ghost-hero">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>
+        Tableau de synthèse
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Explorer</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
+</section>
+
+<!-- SECTIONS -->
+<section class="sections-nav">
+  <div class="container">
+    <div class="sn-header reveal">
+      <div class="s-label">Explorer le portfolio</div>
+      <h2 class="s-title">Ce que vous trouverez ici</h2>
+      <p class="sn-sub">Naviguez dans les différentes sections pour en apprendre plus sur mon parcours, mes projets et mes compétences.</p>
+    </div>
+
+    <div class="sn-grid">
+
+      <a href="profil.html" class="sn-item reveal">
+        <div class="sn-num">01</div>
+        <div class="sn-icon-wrap ic-teal">👤</div>
+        <h3>Profil</h3>
+        <p>Qui je suis, mes compétences techniques et ce que je recherche.</p>
+        <div class="sn-link link-teal">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="parcours.html" class="sn-item reveal d1">
+        <div class="sn-num">02</div>
+        <div class="sn-icon-wrap ic-indigo">🎓</div>
+        <h3>Parcours</h3>
+        <p>Ma formation BTS SIO SISR et mon cursus scolaire.</p>
+        <div class="sn-link link-indigo">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="entreprise.html" class="sn-item reveal d2">
+        <div class="sn-num">03</div>
+        <div class="sn-icon-wrap ic-amber">🏢</div>
+        <h3>Entreprise</h3>
+        <p>Mes deux stages chez Sorbonne Université et Vivendi.</p>
+        <div class="sn-link link-amber">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="e5.html" class="sn-item reveal">
+        <div class="sn-num">04</div>
+        <div class="sn-icon-wrap ic-green">🏆</div>
+        <h3>Compétences E5</h3>
+        <p>Tableau de synthèse, Blocs 1 & 2 et Cybersécurité — tout ce qui prépare l'épreuve E5.</p>
+        <div class="sn-link link-green">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="projets.html" class="sn-item reveal d1">
+        <div class="sn-num">05</div>
+        <div class="sn-icon-wrap ic-rose">💼</div>
+        <h3>Projets</h3>
+        <p>GSB, administration système &amp; réseaux, cybersécurité.</p>
+        <div class="sn-link link-rose">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="veille.html" class="sn-item reveal d2">
+        <div class="sn-num">06</div>
+        <div class="sn-icon-wrap ic-violet">🔬</div>
+        <h3>Veille</h3>
+        <p>Ma veille technologique sur l'IA au service de la santé.</p>
+        <div class="sn-link link-violet">Découvrir <span>→</span></div>
+      </a>
+
+      <a href="contact.html" class="sn-item reveal">
+        <div class="sn-num">07</div>
+        <div class="sn-icon-wrap ic-sky">✉️</div>
+        <h3>Contact</h3>
+        <p>Vous souhaitez me contacter ? Je suis disponible ici.</p>
+        <div class="sn-link link-sky">Me contacter <span>→</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+</body>
+</html>
