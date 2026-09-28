@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entreprise — Brahim Lazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-global.css">
+<style>
+
+/* ══ LAYOUT GLOBAL ══ */
+.xp-section { padding: 4rem 0 8rem; background: var(--white); }
+
+/* ══ SWITCHER STAGES ══ */
+.stage-switcher {
+  display: flex;
+  gap: 0;
+  background: #111827;
+  border-radius: 14px;
+  padding: 5px;
+  width: fit-content;
+  margin: 0 auto 4rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.18);
+}
+.sw-btn {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .85rem 2rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,.4);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all .3s ease;
+  white-space: nowrap;
+}
+.sw-btn.active-amber { background: #f5a623; color: #1a0f00; box-shadow: 0 4px 20px rgba(245,166,35,.4); }
+.sw-btn.active-teal  { background: var(--teal); color: #001a18; box-shadow: 0 4px 20px rgba(0,191,174,.4); }
+.sw-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sw-dot.amber { background: #f5a623; }
+.sw-dot.teal  { background: var(--teal); }
+.sw-btn:not(.active-amber):not(.active-teal) .sw-dot { opacity: .3; }
+
+/* ══ SCÈNES ══ */
+.stage-scene { display: none; animation: fadeUp .4s ease; }
+.stage-scene.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+
+/* ══ SLIDES WRAPPER ══ */
+.slides { display: flex; flex-direction: column; gap: 0; }
+
+/* ══ SLIDE — base ══ */
+.slide {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.slide:last-child { margin-bottom: 0; }
+
+/* ── SLIDE 1 : Présentation (style PPT sombre) ── */
+.slide-pres {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 340px;
+}
+.slide-pres-left {
+  background: #0a0a0a;
+  padding: 2.8rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.slide-pres-left::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.03);
+}
+.slide-pres-left::before {
+  content: '';
+  position: absolute;
+  right: -30px; bottom: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.025);
+}
+.slide-pres-label {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .8rem;
+  position: relative; z-index: 1;
+}
+.amber .slide-pres-label { color: #f5a623; }
+.teal-s .slide-pres-label { color: var(--teal); }
+.slide-pres-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 1.6rem;
+  position: relative; z-index: 1;
+}
+.slide-pres-title em { display: block; }
+.amber .slide-pres-title em { color: #f5a623; font-style: italic; }
+.teal-s .slide-pres-title em { color: var(--teal); font-style: italic; }
+.slide-pres-facts { display: flex; flex-direction: column; gap: .5rem; position: relative; z-index: 1; }
+.fact-row {
+  display: flex; align-items: flex-start; gap: .6rem;
+  font-size: .8rem; color: rgba(255,255,255,.65); line-height: 1.45;
+}
+.fact-bullet {
+  width: 5px; height: 5px; border-radius: 50%;
+  flex-shrink: 0; margin-top: .45rem;
+}
+.amber .fact-bullet { background: #f5a623; }
+.teal-s .fact-bullet { background: var(--teal); }
+.fact-label { font-weight: 700; color: rgba(255,255,255,.35); margin-right: .3rem; }
+
+.slide-pres-right {
+  background: #f8f9fc;
+  padding: 2.5rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.slide-pres-right-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.8rem; }
+.slide-pres-desc { font-size: .92rem; color: #374151; line-height: 1.75; max-width: 460px; font-style: italic; }
+.company-logo-box {
+  width: 88px; height: 88px;
+  border-radius: 16px;
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+}
+
+/* Organigramme */
+.orgchart { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.org-row { display: flex; justify-content: center; gap: 1.2rem; position: relative; }
+.org-row + .org-row { margin-top: 0; }
+
+.org-node {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: .55rem 1rem;
+  border-radius: 8px;
+  font-size: .72rem; font-weight: 600;
+  line-height: 1.35;
+  min-width: 130px; max-width: 160px;
+  position: relative;
+}
+.org-node.dark { background: #1f2937; color: #f9fafb; }
+.org-node.amber-n { background: #92400e; color: #fef3c7; }
+.org-node.teal-n { background: #065f46; color: #d1fae5; }
+.org-node.me-amber { background: #f5a623; color: #1a0f00; font-weight: 800; }
+.org-node.me-teal  { background: var(--teal); color: #001a18; font-weight: 800; }
+.org-node.peer { background: #374151; color: #e5e7eb; }
+
+/* Connecteurs SVG entre niveaux */
+.org-connector {
+  width: 100%; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.org-connector svg { width: 100%; height: 28px; }
+
+/* ── SLIDE 2 : Mission ── */
+.slide-mission {
+  background: #111827;
+  padding: 2.8rem 3rem;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.sm-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  color: white;
+  line-height: 1.2;
+  margin-bottom: .4rem;
+}
+.sm-subtitle {
+  font-size: .82rem;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 1.8rem;
+  font-style: italic;
+}
+.sm-block-title {
+  font-family: var(--font-mono);
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: .9rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.amber .sm-block-title { color: #f5a623; }
+.teal-s .sm-block-title { color: var(--teal); }
+.sm-list { display: flex; flex-direction: column; gap: .7rem; }
+.sm-item {
+  display: flex; align-items: flex-start; gap: .8rem;
+  font-size: .88rem; color: rgba(255,255,255,.75); line-height: 1.6;
+}
+.sm-item-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0; margin-top: .5rem;
+}
+.amber .sm-item-dot { background: #f5a623; }
+.teal-s .sm-item-dot { background: var(--teal); }
+
+/* Outils */
+.sm-tools { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
+.sm-tool {
+  font-family: var(--font-mono);
+  font-size: .72rem; font-weight: 700;
+  padding: .35rem .85rem;
+  border-radius: 6px; border: 1.5px solid;
+}
+.amber .sm-tool { background: rgba(245,166,35,.1); color: #f5a623; border-color: rgba(245,166,35,.3); }
+.teal-s .sm-tool { background: rgba(0,191,174,.1); color: var(--teal); border-color: rgba(0,191,174,.3); }
+
+/* Lien rapport */
+.sm-report {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .8rem; font-weight: 700;
+  text-decoration: none;
+  padding: .6rem 1.4rem;
+  border-radius: 8px;
+  margin-top: 1.8rem;
+  transition: all .2s ease;
+  font-family: var(--font-mono);
+  letter-spacing: .04em;
+}
+.amber .sm-report { background: #f5a623; color: #1a0f00; }
+.amber .sm-report:hover { background: #ffc043; box-shadow: 0 6px 20px rgba(245,166,35,.35); }
+.teal-s .sm-report { background: var(--teal); color: #001a18; }
+.teal-s .sm-report:hover { background: #00d4c2; box-shadow: 0 6px 20px rgba(0,191,174,.35); }
+
+/* ══ NUMÉRO DE SLIDE ══ */
+.slide-num {
+  position: absolute;
+  bottom: 1rem; right: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  color: rgba(255,255,255,.2);
+  z-index: 5;
+}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .slide-pres { grid-template-columns: 1fr; }
+  .slide-mission { grid-template-columns: 1fr; }
+}
+@media(max-width:640px){
+  .stage-switcher { width: 100%; }
+  .sw-btn { flex: 1; justify-content: center; padding: .8rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container">
+    <div class="page-hero-inner reveal">
+      <div class="page-hero-badge">Épreuve E5 · Présentation des réalisations professionnelles</div>
+      <h1>Mes <em>Stages</em></h1>
+      <p>Deux expériences en milieu professionnel réel — un groupe international de médias et l'une des plus grandes universités de France.</p>
+    </div>
+  </div>
+</section>
+
+<section class="xp-section">
+  <div class="container">
+
+    <!-- SWITCHER -->
+    <div class="stage-switcher reveal" id="switcher">
+      <button class="sw-btn active-amber" onclick="showStage('vivendi')">
+        <span class="sw-dot amber"></span>Stage 1 — Vivendi
+      </button>
+      <button class="sw-btn" onclick="showStage('sorbonne')">
+        <span class="sw-dot teal"></span>Stage 2 — Sorbonne
+      </button>
+    </div>
+
+    <!-- ══════════════ VIVENDI ══════════════ -->
+    <div class="stage-scene active amber" id="scene-vivendi">
+      <div class="slides">
+
+        <!-- SLIDE 1 — Présentation Vivendi -->
+        <div class="slide slide-pres">
+          <div class="slide-pres-left">
+            <div class="slide-pres-label">Stage 1 · Juin – Août 2025</div>
+            <div class="slide-pres-title">
+              Vivendi
+              <em>DSI</em>
+            </div>
+            <div class="slide-pres-facts">
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Secteur :</span>Médias &amp; divertissement</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Siège :</span>42 Av. de Friedland, Paris 8e</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Taille :</span>+10 000 collaborateurs</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Filiales :</span>Canal+, Universal Music Group, Gameloft</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Durée :</span>~4 semaines</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-pres-right">
+            <div class="slide-pres-right-top">
+              <div class="slide-pres-desc">Groupe international de médias et divertissement. La DSI gère l'infrastructure réseau de l'ensemble des entités du groupe en production.</div>
+              <div class="company-logo-box">🏢</div>
+            </div>
+            <!-- Organigramme Vivendi -->
+            <div class="orgchart">
+              <div class="org-row">
+                <div class="org-node amber-n">RENAUD Stéphane<br><span style="font-weight:400;opacity:.8">Directeur des Systèmes d'Informations (DSI)</span></div>
+              </div>
+              <div class="org-connector">
+                <svg viewBox="0 0 200 28" preserveAspectRatio="none">
+                  <line x1="100" y1="0" x2="100" y2="28" stroke="#374151" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="org-row">
+                <div class="org-node dark">LE BRAS Erwan<br><span style="color:rgba(255,255,255,.45);font-weight:400">IT Operation Manager (Tuteur)</span></div>
+              </div>
+              <div class="org-connector">
+                <svg viewBox="0 0 200 28" preserveAspectRatio="none">
+                  <line x1="100" y1="0" x2="100" y2="28" stroke="#374151" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="org-row">
+                <div class="org-node peer">Administrateurs / Ingénieurs<br><span style="font-weight:400;opacity:.7">(Internes &amp; Prestataires)</span></div>
+              </div>
+              <div class="org-connector">
+                <svg viewBox="0 0 200 28" preserveAspectRatio="none">
+                  <line x1="100" y1="0" x2="100" y2="28" stroke="#374151" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="org-row">
+                <div class="org-node me-amber">Brahim LAZAR<br>Stagiaire BTS SIO</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-num">01 / 02</div>
+        </div>
+
+        <!-- SLIDE 2 — Mission Vivendi -->
+        <div class="slide slide-mission amber">
+          <div>
+            <div class="sm-title">Mon rôle dans l'entreprise</div>
+            <div class="sm-subtitle">Au sein de la DSI — Infrastructure réseau</div>
+            <div class="sm-block-title">Missions confiées</div>
+            <div class="sm-list">
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Audit du parc Cisco de secours — relevé des versions IOS et de l'état de la mémoire flash via <strong style="color:rgba(255,255,255,.9)">show version</strong> et <strong style="color:rgba(255,255,255,.9)">show flash</strong></div>
+              </div>
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Mise à jour du firmware IOS des switchs de secours via liaison série <strong style="color:rgba(255,255,255,.9)">PuTTY</strong> et transfert <strong style="color:rgba(255,255,255,.9)">TFTP (Tftpd64)</strong> — vérification MD5, boot system, reload et validation</div>
+              </div>
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Documentation technique — fiche par switch : modèle, n° série, version IOS avant/après, résultat post-boot</div>
+              </div>
+            </div>
+            <a href="Rapport_De_Stage_Vivendi.pdf" target="_blank" class="sm-report">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Rapport de stage
+            </a>
+          </div>
+          <div>
+            <div class="sm-block-title">Environnement technique</div>
+            <div class="sm-tools">
+              <span class="sm-tool">Cisco IOS</span>
+              <span class="sm-tool">PuTTY</span>
+              <span class="sm-tool">Tftpd64 (TFTP)</span>
+              <span class="sm-tool">Console RS-232</span>
+              <span class="sm-tool">show version</span>
+              <span class="sm-tool">show flash</span>
+              <span class="sm-tool">copy tftp flash</span>
+              <span class="sm-tool">boot system</span>
+              <span class="sm-tool">MD5</span>
+            </div>
+          </div>
+          <div class="slide-num" style="color:rgba(255,255,255,.15)">02 / 02</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════ SORBONNE ══════════════ -->
+    <div class="stage-scene teal-s" id="scene-sorbonne">
+      <div class="slides">
+
+        <!-- SLIDE 1 — Présentation Sorbonne -->
+        <div class="slide slide-pres">
+          <div class="slide-pres-left">
+            <div class="slide-pres-label">Stage 2 · Janv. – Fév. 2026</div>
+            <div class="slide-pres-title">
+              Sorbonne
+              <em>Université — DSI</em>
+            </div>
+            <div class="slide-pres-facts">
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Secteur :</span>Enseignement supérieur public</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Siège :</span>17 rue de la Sorbonne, Paris 5e</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Campus :</span>13 sites parisiens</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Effectif :</span>~40 000 étudiants</div>
+              </div>
+              <div class="fact-row">
+                <div class="fact-bullet"></div>
+                <div><span class="fact-label">Durée :</span>6 semaines</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-pres-right">
+            <div class="slide-pres-right-top">
+              <div class="slide-pres-desc">Université publique fondée en 1257. La DSI Faculté des Lettres gère ~2 800 postes répartis sur 13 campus parisiens. Équipe de 7 techniciens.</div>
+              <div class="company-logo-box">🎓</div>
+            </div>
+            <!-- Organigramme Sorbonne -->
+            <div class="orgchart">
+              <div class="org-row">
+                <div class="org-node dark">Responsable DSI<br><span style="color:rgba(255,255,255,.45);font-weight:400">M. Hugues Kofi</span></div>
+              </div>
+              <div class="org-connector">
+                <svg viewBox="0 0 200 28" preserveAspectRatio="none">
+                  <line x1="100" y1="0" x2="100" y2="28" stroke="#374151" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="org-row">
+                <div class="org-node teal-n">Responsable service assistance<br><span style="font-weight:400;opacity:.8">M. Philippe Louise</span></div>
+              </div>
+              <div class="org-connector">
+                <svg viewBox="0 0 520 28" preserveAspectRatio="none">
+                  <line x1="260" y1="0" x2="260" y2="14" stroke="#374151" stroke-width="1.5"/>
+                  <line x1="60" y1="14" x2="460" y2="14" stroke="#374151" stroke-width="1.5"/>
+                  <line x1="60"  y1="14" x2="60"  y2="28" stroke="#374151" stroke-width="1.5"/>
+                  <line x1="180" y1="14" x2="180" y2="28" stroke="#374151" stroke-width="1.5"/>
+                  <line x1="340" y1="14" x2="340" y2="28" stroke="#374151" stroke-width="1.5"/>
+                  <line x1="460" y1="14" x2="460" y2="28" stroke="#374151" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="org-row" style="gap:.7rem">
+                <div class="org-node peer" style="min-width:100px;font-size:.65rem">Technicien<br>senior ×5</div>
+                <div class="org-node me-teal" style="min-width:110px;font-size:.65rem">Brahim LAZAR<br>Stagiaire</div>
+                <div class="org-node peer" style="min-width:100px;font-size:.65rem">Alternant</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-num">01 / 02</div>
+        </div>
+
+        <!-- SLIDE 2 — Mission Sorbonne -->
+        <div class="slide slide-mission teal-s">
+          <div>
+            <div class="sm-title">Mon rôle dans l'entreprise</div>
+            <div class="sm-subtitle">Au sein du service d'assistance informatique</div>
+            <div class="sm-block-title">Missions confiées</div>
+            <div class="sm-list">
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Déploiement de <strong style="color:rgba(255,255,255,.9)">~50 postes Windows 11</strong> (Dell, HP, Mac) via serveur MDT/PXE — image OS + Office + F-Secure + applications métier sur 13 campus</div>
+              </div>
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Jonction au domaine <strong style="color:rgba(255,255,255,.9)">Active Directory</strong> — création manuelle des comptes, OU, groupes de sécurité et droits NTFS pour les nouveaux arrivants</div>
+              </div>
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Gestion des tickets <strong style="color:rgba(255,255,255,.9)">GLPI</strong> N1/N2 — incidents matériels (USB-C Dell, batterie HP, docks), logiciels (Outlook, pilotes, Eduroam), SAV constructeurs</div>
+              </div>
+              <div class="sm-item">
+                <div class="sm-item-dot"></div>
+                <div>Assistance sur site et à distance via <strong style="color:rgba(255,255,255,.9)">TeamViewer</strong> — installation imprimante HP (IP réseau), configuration messagerie Exchange, accompagnement utilisateurs</div>
+              </div>
+            </div>
+            <a href="RAPPORT_STAGE_BRAHIM_LAZAR.docx" target="_blank" class="sm-report">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Rapport de stage
+            </a>
+          </div>
+          <div>
+            <div class="sm-block-title">Environnement technique</div>
+            <div class="sm-tools">
+              <span class="sm-tool">MDT / PXE</span>
+              <span class="sm-tool">Windows 11</span>
+              <span class="sm-tool">Active Directory</span>
+              <span class="sm-tool">GPO</span>
+              <span class="sm-tool">GLPI</span>
+              <span class="sm-tool">TeamViewer</span>
+              <span class="sm-tool">Office 2021</span>
+              <span class="sm-tool">F-Secure</span>
+              <span class="sm-tool">Eduroam</span>
+              <span class="sm-tool">Exchange</span>
+            </div>
+          </div>
+          <div class="slide-num" style="color:rgba(255,255,255,.15)">02 / 02</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lien E5 -->
+    <div style="text-align:center;margin-top:4rem" class="reveal">
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:1rem">Les compétences mobilisées lors de ces stages sont détaillées dans le tableau de synthèse E5.</p>
+      <a href="e5.html" style="display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.8rem;border-radius:8px;background:var(--ink);color:white;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .25s ease" onmouseover="this.style.background='var(--teal)'" onmouseout="this.style.background='var(--ink)'">
+        Voir les compétences E5 →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+function showStage(id) {
+  document.querySelectorAll('.stage-scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene-' + id).classList.add('active');
+  const btns = document.querySelectorAll('.sw-btn');
+  btns.forEach(b => b.classList.remove('active-amber','active-teal'));
+  if (id === 'vivendi') btns[0].classList.add('active-amber');
+  else btns[1].classList.add('active-teal');
+}
+</script>
+</body>
+</html>

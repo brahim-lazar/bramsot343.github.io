@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil — Brahim Lazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-global.css">
+<style>
+.profil-section{padding:6rem 0 7rem;background:var(--white);overflow:hidden}
+.profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.profil-name-line{display:flex;align-items:baseline;gap:.9rem;margin-bottom:2.2rem;flex-wrap:wrap}
+.profil-name-line h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--ink);line-height:1.1;margin:0}
+.profil-age-tag{font-family:var(--font-mono);font-size:.72rem;font-weight:700;padding:.3rem .85rem;border-radius:50px;background:var(--surface);color:var(--subtle);border:1.5px solid var(--line);letter-spacing:.06em;white-space:nowrap}
+.profil-intro{font-size:1.05rem;color:var(--ink);font-weight:500;line-height:1.85;margin-bottom:1.1rem}
+.profil-intro em{color:var(--teal);font-style:normal;font-weight:700}
+.profil-body{font-size:.97rem;color:var(--muted);line-height:1.9;margin-bottom:1.1rem}
+.profil-body strong{color:var(--ink);font-weight:600}
+.profil-divider{display:flex;align-items:center;gap:1rem;margin:1.8rem 0}
+.profil-divider-line{flex:1;height:1px;background:var(--line)}
+.profil-divider-icon{font-size:.85rem;color:var(--subtle)}
+.profil-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.profil-chip{font-size:.78rem;font-weight:600;padding:.38rem 1rem;border-radius:50px;background:var(--teal-dim);color:var(--teal);border:1.5px solid rgba(0,191,174,.25);transition:all .2s var(--ease)}
+.profil-chip:hover{background:var(--teal);color:white}
+.profil-aside{display:flex;flex-direction:column;gap:1rem}
+.info-box{display:flex;align-items:center;gap:1.2rem;padding:1.15rem 1.5rem;background:var(--surface);border-radius:var(--r);border:1.5px solid var(--line);transition:all .3s var(--ease);text-decoration:none;color:inherit}
+.info-box:hover,.info-box:focus{border-color:var(--teal);transform:translateX(4px);box-shadow:0 6px 24px rgba(0,191,174,.1)}
+.info-icon{font-size:1.35rem;min-width:32px;text-align:center}
+.info-label{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--subtle);margin-bottom:.18rem}
+.info-val{font-size:.92rem;font-weight:600;color:var(--ink)}
+.avail-card{display:flex;align-items:center;gap:1.2rem;padding:1.3rem 1.6rem;background:linear-gradient(135deg,#e8fdf8,#d0f7f0);border:1.5px solid rgba(0,191,174,.3);border-radius:var(--r);position:relative;overflow:hidden}
+.avail-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(0,191,174,.08);pointer-events:none}
+.avail-pulse{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(0,191,174,.2);flex-shrink:0;animation:pulse-dot 1.8s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 3px rgba(0,191,174,.25)}50%{box-shadow:0 0 0 7px rgba(0,191,174,.07)}}
+.avail-card strong{color:#007a6e;font-size:.93rem;display:block;margin-bottom:.15rem}
+.avail-card p{font-size:.81rem;color:#009e8e;margin:0}
+.formation{padding:6rem 0 5rem;background:var(--surface)}
+.formation-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;margin-top:3.5rem}
+.pc{background:var(--white);border-radius:var(--r-lg);border:1.5px solid var(--line);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.05);transition:all .3s var(--ease)}
+.pc:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+.pc-head{padding:1.8rem 2rem;display:flex;align-items:center;gap:1.2rem}
+.pc.sisr .pc-head{background:linear-gradient(135deg,#0d1117,#1e2533)}
+.pc.slam .pc-head{background:linear-gradient(135deg,#1a0d2e,#2d1b4e)}
+.pc-icon{width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.pc-title{font-family:var(--font-display);font-size:1.2rem;color:white}
+.pc-sub{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+.pc-badge{margin-left:auto;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.3rem .8rem;border-radius:50px;white-space:nowrap}
+.badge-teal{background:rgba(0,191,174,.25);color:var(--teal)}
+.badge-purple{background:rgba(147,112,219,.25);color:#9370db}
+.pc-body{padding:1.8rem 2rem}
+.pc-list{display:flex;flex-direction:column;gap:.85rem}
+.pc-item{display:flex;align-items:flex-start;gap:.8rem;font-size:.9rem;color:var(--muted);line-height:1.65}
+.pc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:.5rem}
+.dot-teal{background:var(--teal)}.dot-purple{background:#9370db}
+.pc-item strong{color:var(--ink)}
+.soft-section{padding:5rem 0 8rem;background:var(--white)}
+.soft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem;margin-top:3rem}
+.soft-card{background:var(--white);border-radius:var(--r);padding:1.8rem;border:1.5px solid var(--line);transition:all .3s var(--ease)}
+.soft-card:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,191,174,.1)}
+.soft-icon{font-size:2rem;margin-bottom:.8rem}
+.soft-card h4{font-family:var(--font-display);font-size:1.1rem;color:var(--ink);margin-bottom:.5rem}
+.soft-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+@media(max-width:1024px){.profil-grid{grid-template-columns:1fr}.formation-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container">
+    <div class="page-hero-inner reveal">
+      <div class="page-hero-badge">À propos de moi</div>
+      <h1>Mon <em>Profil</em></h1>
+      <p>Informations personnelles, compétences techniques et disponibilités.</p>
+    </div>
+  </div>
+</section>
+
+<section class="profil-section">
+  <div class="container">
+    <div class="profil-grid">
+
+      <div class="profil-text reveal">
+        <div class="s-label">Présentation</div>
+
+        <div class="profil-name-line">
+          <h2>Brahim Lazar</h2>
+          <span class="profil-age-tag">19 ans</span>
+        </div>
+
+        <p class="profil-intro">
+          Passionné par les <em>infrastructures informatiques</em>, les réseaux
+          et la cybersécurité, je suis en 2e année de <em>BTS SIO SISR</em>
+          au Lycée Auguste Blanqui à Saint-Ouen — une formation que j'ai choisie
+          par conviction, pas par défaut.
+        </p>
+
+        <p class="profil-body">
+          Avant d'arriver là, j'ai obtenu un <strong>Bac STMG</strong> avec une
+          spécialité Systèmes d'Information de Gestion : c'est là que j'ai eu mon
+          premier vrai contact avec l'informatique, et que j'ai compris que c'est
+          ce domaine que je voulais approfondir.
+        </p>
+
+        <p class="profil-body">
+          Aujourd'hui, je m'intéresse particulièrement à l'<strong>administration
+          des systèmes</strong>, à la <strong>sécurité des infrastructures</strong>
+          et à la <strong>virtualisation</strong>. J'ai pu mettre ces compétences
+          en pratique lors de deux stages en entreprise, et je continue à me former
+          en dehors des cours — notamment via des défis de cybersécurité.
+        </p>
+
+        <p class="profil-body">
+          Mon objectif pour la suite : une <strong>Licence Pro en alternance</strong>
+          dans les réseaux ou la cybersécurité, pour combiner formation avancée
+          et terrain réel.
+        </p>
+
+        <div class="profil-divider">
+          <div class="profil-divider-line"></div>
+          <span class="profil-divider-icon">⚡</span>
+          <div class="profil-divider-line"></div>
+        </div>
+
+        <div class="profil-chips">
+          <span class="profil-chip">Administration systèmes</span>
+          <span class="profil-chip">Réseaux &amp; routage</span>
+          <span class="profil-chip">Virtualisation</span>
+          <span class="profil-chip">Sécurité réseau</span>
+          <span class="profil-chip">Scripting</span>
+          <span class="profil-chip">Support utilisateur</span>
+        </div>
+      </div>
+
+      <div class="profil-aside reveal d2">
+        <div class="info-box">
+          <div class="info-icon">🎓</div>
+          <div><div class="info-label">Formation</div><div class="info-val">BTS SIO SISR — 2e année</div></div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📍</div>
+          <div><div class="info-label">Localisation</div><div class="info-val">Île-de-France</div></div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🏫</div>
+          <div><div class="info-label">Établissement</div><div class="info-val">Lycée Auguste Blanqui, Saint-Ouen</div></div>
+        </div>
+        <a class="info-box" href="mailto:brahimlazar343@gmail.com">
+          <div class="info-icon">✉️</div>
+          <div><div class="info-label">Email</div><div class="info-val">brahimlazar343@gmail.com</div></div>
+        </a>
+        <div class="info-box">
+          <div class="info-icon">🎯</div>
+          <div><div class="info-label">Objectif</div><div class="info-val">Licence Pro en alternance — Réseaux / Cyber</div></div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🌐</div>
+          <div><div class="info-label">Langues</div><div class="info-val">Français C2 · Anglais B2 · Espagnol A2</div></div>
+        </div>
+        <div class="avail-card">
+          <div class="avail-pulse"></div>
+          <div>
+            <strong>Disponible pour une alternance</strong>
+            <p>Licence Professionnelle en alternance à partir de 2026</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="formation">
+  <div class="container">
+    <div class="s-label reveal">BTS SIO</div>
+    <h2 class="s-title reveal">Formation BTS SIO</h2>
+    <p class="s-sub reveal">Le BTS SIO se décline en deux spécialités. Ma formation SISR m'a permis d'aborder également des notions SLAM, assurant une vision complète du domaine.</p>
+    <div class="formation-grid">
+      <div class="pc sisr reveal">
+        <div class="pc-head">
+          <div class="pc-icon">🖧</div>
+          <div><div class="pc-title">SISR</div><div class="pc-sub">Solutions d'Infrastructure, Systèmes et Réseaux</div></div>
+          <div class="pc-badge badge-teal">Ma spécialité</div>
+        </div>
+        <div class="pc-body">
+          <ul class="pc-list">
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Administration systèmes :</strong> Windows Server &amp; Linux (Debian, Ubuntu), gestion des utilisateurs, droits, services systemd.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Réseaux &amp; routage :</strong> Adressage IP, VLANs, protocoles RIP / OSPF, configuration de routeurs et commutateurs.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Virtualisation :</strong> VMware ESXi, VirtualBox, Proxmox — création et gestion de machines virtuelles.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Sécurité réseau :</strong> Pare-feux pfSense, règles ACL, VPN OpenVPN / IPsec, politiques de sécurité.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Services réseau :</strong> DHCP, DNS, Active Directory, Apache, Nginx, SSH, FTP.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-teal"></span><span><strong>Supervision :</strong> Monitoring avec Zabbix et Nagios, analyse des logs système.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pc slam reveal d2">
+        <div class="pc-head">
+          <div class="pc-icon">💻</div>
+          <div><div class="pc-title">SLAM</div><div class="pc-sub">Solutions Logicielles et Applications Métiers</div></div>
+          <div class="pc-badge badge-purple">Notions abordées</div>
+        </div>
+        <div class="pc-body">
+          <ul class="pc-list">
+            <li class="pc-item"><span class="pc-dot dot-purple"></span><span><strong>Développement web :</strong> HTML, CSS, initiation JavaScript pour des interfaces simples.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-purple"></span><span><strong>Bases de données :</strong> Modèles relationnels (MCD/MLD), requêtes SQL (SELECT, JOIN, UPDATE).</span></li>
+            <li class="pc-item"><span class="pc-dot dot-purple"></span><span><strong>Scripting :</strong> Bash sous Linux et PowerShell sous Windows pour l'automatisation de tâches.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-purple"></span><span><strong>Algorithmique :</strong> Structures de base : boucles, conditions, fonctions, tableaux.</span></li>
+            <li class="pc-item"><span class="pc-dot dot-purple"></span><span><strong>Applications réseau :</strong> Manipulation d'APIs, sockets et protocoles HTTP dans le cadre des projets SISR.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft-section">
+  <div class="container">
+    <div class="s-label reveal">Savoir-être</div>
+    <h2 class="s-title reveal">Compétences transversales</h2>
+    <div class="soft-grid">
+      <div class="soft-card reveal">
+        <div class="soft-icon">🔍</div>
+        <h4>Curiosité technique</h4>
+        <p>Toujours en veille sur les nouvelles technologies, les protocoles et les outils. J'aime comprendre comment les systèmes fonctionnent en profondeur.</p>
+      </div>
+      <div class="soft-card reveal d1">
+        <div class="soft-icon">🧩</div>
+        <h4>Résolution de problèmes</h4>
+        <p>Méthodologie de dépannage rigoureuse : isoler, reproduire, analyser les logs, tester et documenter la solution.</p>
+      </div>
+      <div class="soft-card reveal d2">
+        <div class="soft-icon">🤝</div>
+        <h4>Travail en équipe</h4>
+        <p>Habitué à collaborer en binôme ou en groupe sur des projets d'infrastructure, avec une communication claire et des rôles bien définis.</p>
+      </div>
+      <div class="soft-card reveal d3">
+        <div class="soft-icon">📝</div>
+        <h4>Documentation</h4>
+        <p>Sens de la rigueur dans la rédaction de procédures, rapports de stage et documentations techniques accessibles.</p>
+      </div>
+      <div class="soft-card reveal">
+        <div class="soft-icon">⚡</div>
+        <h4>Adaptabilité</h4>
+        <p>Capable de prendre en main rapidement un nouvel environnement technique, comme lors de mes stages en entreprise.</p>
+      </div>
+      <div class="soft-card reveal d1">
+        <div class="soft-icon">🎯</div>
+        <h4>Autonomie</h4>
+        <p>Capacité à mener des tâches de manière indépendante, à rechercher des solutions et à prendre des initiatives réfléchies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+</body>
+</html>

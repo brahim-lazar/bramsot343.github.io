@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projets — Brahim Lazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-global.css">
+<style>
+/* ── FILTERS ── */
+.filters-bar{background:var(--white);border-bottom:1.5px solid var(--line);position:sticky;top:65px;z-index:800}
+.filters-inner{display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem 0}
+.proj-filter{padding:.55rem 1.3rem;border-radius:50px;font-size:.85rem;font-weight:600;border:1.5px solid var(--line);color:var(--muted);background:var(--white);transition:all .25s var(--ease);cursor:pointer}
+.proj-filter:hover{border-color:var(--teal);color:var(--teal)}
+.proj-filter.active{background:var(--ink);border-color:var(--ink);color:white}
+
+/* ── SECTION WRAPPER ── */
+.projets-section{padding:5rem 0 4rem}
+.projets-section.bg-surface{background:var(--surface)}
+.projets-section.bg-white{background:var(--white)}
+.projets-section:last-of-type{padding-bottom:7rem}
+
+.section-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--line)}
+.section-header-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.icon-gsb{background:linear-gradient(135deg,rgba(0,191,174,.15),rgba(0,191,174,.04));border:1.5px solid rgba(0,191,174,.25)}
+.icon-infra{background:linear-gradient(135deg,rgba(67,97,238,.15),rgba(67,97,238,.04));border:1.5px solid rgba(67,97,238,.25)}
+.icon-cyber{background:linear-gradient(135deg,rgba(232,96,76,.15),rgba(232,96,76,.04));border:1.5px solid rgba(232,96,76,.25)}
+.icon-certif{background:linear-gradient(135deg,rgba(245,166,35,.15),rgba(245,166,35,.04));border:1.5px solid rgba(245,166,35,.25)}
+.section-header-text h2{font-family:var(--font-display);font-size:1.55rem;color:var(--ink);line-height:1.2}
+.section-header-text p{font-size:.85rem;color:var(--subtle);margin-top:.2rem}
+.section-count{margin-left:auto;font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--subtle);background:var(--surface);padding:.3rem .8rem;border-radius:50px;border:1px solid var(--line);white-space:nowrap}
+
+/* ── GRID ── */
+.projets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.8rem}
+
+/* ── CARD ── */
+.proj-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1.5px solid var(--line);transition:all .3s var(--ease);display:flex;flex-direction:column}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,.1);border-color:transparent}
+.proj-card-img{height:150px;position:relative}
+.grad-gsb{background:linear-gradient(135deg,#002b27,#00594f)}
+.grad-infra{background:linear-gradient(135deg,#0f1e3a,#1e3a6e)}
+.grad-cyber{background:linear-gradient(135deg,#1a0505,#4a0e0e)}
+.grad-certif{background:linear-gradient(135deg,#1a1000,#4a3000)}
+
+.proj-label{position:absolute;top:1rem;right:1rem;font-size:.7rem;font-weight:700;padding:.3rem .85rem;border-radius:50px;text-transform:uppercase;letter-spacing:.07em}
+.lbl-gsb{background:rgba(0,191,174,.2);color:var(--teal);border:1px solid rgba(0,191,174,.35)}
+.lbl-infra{background:rgba(67,97,238,.2);color:#4361ee;border:1px solid rgba(67,97,238,.35)}
+.lbl-cyber{background:rgba(232,96,76,.2);color:#e8604c;border:1px solid rgba(232,96,76,.35)}
+.lbl-certif{background:rgba(245,166,35,.2);color:#d97706;border:1px solid rgba(245,166,35,.35)}
+
+.proj-icon{position:absolute;left:1.4rem;bottom:1.4rem;font-size:2rem}
+.proj-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.proj-body h3{font-family:var(--font-display);font-size:1.08rem;color:var(--ink);margin-bottom:.3rem;line-height:1.3}
+.proj-meta{font-size:.76rem;color:var(--subtle);margin-bottom:.8rem;font-weight:500}
+.proj-desc{font-size:.87rem;color:var(--muted);line-height:1.75;margin-bottom:1rem;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.proj-tag{font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:50px;background:var(--surface);color:var(--muted)}
+.proj-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;align-self:flex-start;padding:.45rem 1rem;border-radius:50px;border:1.5px solid;transition:all .25s var(--ease)}
+.proj-link:hover{gap:.7rem}
+.proj-link.teal{color:var(--teal);border-color:rgba(0,191,174,.3);background:var(--teal-dim)}
+.proj-link.teal:hover{background:var(--teal);color:white;border-color:var(--teal)}
+.proj-link.indigo{color:#4361ee;border-color:rgba(67,97,238,.3);background:var(--indigo-dim)}
+.proj-link.indigo:hover{background:#4361ee;color:white;border-color:#4361ee}
+.proj-link.coral{color:#e8604c;border-color:rgba(232,96,76,.3);background:rgba(232,96,76,.08)}
+.proj-link.coral:hover{background:#e8604c;color:white;border-color:#e8604c}
+.proj-link.amber{color:#d97706;border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.08)}
+.proj-link.amber:hover{background:#d97706;color:white;border-color:#d97706}
+
+@media(max-width:640px){.projets-grid{grid-template-columns:1fr}.section-count{display:none}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container">
+    <div class="page-hero-inner reveal">
+      <div class="page-hero-badge">Travaux &amp; réalisations</div>
+      <h1>Mes <em>Projets</em></h1>
+      <p>Ateliers professionnels, administration des systèmes et réseaux, cybersécurité et certifications. L'ensemble des réalisations de ma formation BTS SIO SISR.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="container">
+    <div class="filters-inner">
+      <button class="proj-filter active" data-filter="all">Tous</button>
+      <button class="proj-filter" data-filter="infra">Réseaux &amp; Systèmes</button>
+      <button class="proj-filter" data-filter="certif">Certifications</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ PROJETS ══════════════════ -->
+<section class="projets-section bg-surface" id="sec-infra">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-header-icon icon-infra">🖧</div>
+      <div class="section-header-text">
+        <h2>Réseaux &amp; Systèmes</h2>
+        <p>Travaux pratiques en infrastructure, réseaux et administration système</p>
+      </div>
+      <span class="section-count">3 projets</span>
+    </div>
+    <div class="projets-grid">
+
+      <!-- SWITCH -->
+      <article class="proj-card reveal" data-cat="infra">
+        <div class="proj-card-img grad-infra">
+          <div class="proj-label lbl-infra">Réseau</div>
+          <div class="proj-icon">🔌</div>
+        </div>
+        <div class="proj-body">
+          <h3>Switch — VLANs, Spanning Tree &amp; ACL</h3>
+          <p class="proj-meta">TP Infrastructure</p>
+          <p class="proj-desc">
+            Réinitialisation et configuration complète de deux switches Cisco physiques en salle. Création des VLANs 10 (Administrateur), 20 (Marketing) et 30 (IT), affectation des interfaces en mode <strong>access</strong>, mise en place d'un lien <strong>trunk 802.1q</strong> inter-switches (VLANs 10, 20, 30). Configuration du <strong>Spanning Tree</strong> pour éviter les boucles broadcast, passerelle de management, et mise en place d'une <strong>ACL</strong> pour bloquer les pings entrants sur le VLAN 30 tout en autorisant le transit.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Cisco</span>
+            <span class="proj-tag">VLANs</span>
+            <span class="proj-tag">Trunk 802.1q</span>
+            <span class="proj-tag">Spanning Tree</span>
+            <span class="proj-tag">ACL</span>
+          </div>
+          <a href="switch.pdf" target="_blank" class="proj-link indigo">Voir la documentation →</a>
+        </div>
+      </article>
+
+      <!-- GLPI -->
+      <article class="proj-card reveal d1" data-cat="infra">
+        <div class="proj-card-img grad-infra">
+          <div class="proj-label lbl-infra" style="background:rgba(67,97,238,.35);border-style:dashed">En cours ⏳</div>
+          <div class="proj-icon">🛠️</div>
+        </div>
+        <div class="proj-body">
+          <h3>GLPI — Gestion de Parc &amp; Ticketing</h3>
+          <p class="proj-meta">TP Système · <span style="color:#4361ee;font-weight:700">En cours</span></p>
+          <p class="proj-desc">
+            Installation personnelle de <strong>GLPI</strong> sur une VM dédiée (stack LAMP : Apache, PHP, MySQL). Configuration des <strong>entités</strong> pour structurer l'organisation, création de <strong>tickets</strong> avec gabarits prédéfinis, gestion des <strong>utilisateurs</strong> (profils Technicien et Client avec droits distincts) et ajout d'<strong>ordinateurs</strong> dans l'inventaire du parc informatique.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">GLPI</span>
+            <span class="proj-tag">LAMP</span>
+            <span class="proj-tag">Ticketing</span>
+            <span class="proj-tag">Parc informatique</span>
+            <span class="proj-tag">VM</span>
+          </div>
+          <a href="GLPI.pdf" target="_blank" class="proj-link indigo">Voir la documentation →</a>
+        </div>
+      </article>
+
+      <!-- ACTIVE DIRECTORY -->
+      <article class="proj-card reveal d2" data-cat="infra">
+        <div class="proj-card-img grad-infra">
+          <div class="proj-label lbl-infra">Système</div>
+          <div class="proj-icon">🗂️</div>
+        </div>
+        <div class="proj-body">
+          <h3>Active Directory — Groupes, OU &amp; GPO</h3>
+          <p class="proj-meta">TP Système</p>
+          <p class="proj-desc">
+            Administration complète d'un domaine Windows Server : création de <strong>groupes</strong> de sécurité (Formateur, IT), création de <strong>3 utilisateurs</strong> et intégration dans les groupes, mise en place d'<strong>Unités d'Organisation</strong> (UO_Bureau, uo_membres, UO_MenuDémarrer). Création et liaison d'une <strong>GPO</strong> (GPO_Membre) à l'OU pour appliquer une restriction d'accès au panneau de configuration aux utilisateurs ciblés.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Active Directory</span>
+            <span class="proj-tag">Windows Server</span>
+            <span class="proj-tag">GPO</span>
+            <span class="proj-tag">OU</span>
+            <span class="proj-tag">Groupes</span>
+          </div>
+          <a href="AD.pdf" target="_blank" class="proj-link indigo">Voir la documentation →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PARTIE 4 — CERTIFICATIONS ══════════════════ -->
+<section class="projets-section bg-white" id="sec-certif">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-header-icon icon-certif">🏅</div>
+      <div class="section-header-text">
+        <h2>Certifications</h2>
+        <p>Certifications obtenues et en cours de préparation</p>
+      </div>
+      <span class="section-count">2 certifications</span>
+    </div>
+    <div class="projets-grid">
+
+      <article class="proj-card reveal" data-cat="certif">
+        <div class="proj-card-img grad-certif">
+          <div class="proj-label lbl-certif">Obtenue ✓</div>
+          <div class="proj-icon">🎯</div>
+        </div>
+        <div class="proj-body">
+          <h3>Certification Pix</h3>
+          <p class="proj-meta">Certification nationale</p>
+          <p class="proj-desc">Certification nationale des compétences numériques Pix, validant les usages du numérique en milieu professionnel : informations et données, communication, création de contenu, sécurité et environnement numérique.</p>
+          <div class="proj-tags"><span class="proj-tag">Pix</span><span class="proj-tag">Compétences numériques</span><span class="proj-tag">Sécurité</span></div>
+          <span class="proj-link amber" style="pointer-events:none">Obtenue ✓</span>
+        </div>
+      </article>
+
+      <article class="proj-card reveal d1" data-cat="certif">
+        <div class="proj-card-img" style="background:linear-gradient(135deg,#0d0a00,#2a1f00);height:150px;position:relative">
+          <div class="proj-label lbl-certif" style="border-style:dashed">En cours ⚡</div>
+          <div class="proj-icon">💀</div>
+        </div>
+        <div class="proj-body">
+          <h3>Root-Me Pro</h3>
+          <p class="proj-meta">Plateforme CTF · En cours</p>
+          <p class="proj-desc">Entraînement actif sur <strong>Root-Me Pro</strong>, plateforme de cybersécurité orientée CTF (Capture The Flag). Résolution de challenges en sécurité réseau, exploitation web, cryptographie, forensique et analyse système pour renforcer mes compétences offensives et défensives.</p>
+          <div class="proj-tags"><span class="proj-tag">Root-Me</span><span class="proj-tag">CTF</span><span class="proj-tag">Pentest</span><span class="proj-tag">Web</span><span class="proj-tag">Forensique</span><span class="proj-tag">Crypto</span></div>
+          <a href="https://www.root-me.org" target="_blank" class="proj-link amber">Voir Root-Me →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+document.querySelectorAll('.proj-filter').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.proj-filter').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const f = this.dataset.filter;
+
+    document.querySelectorAll('.proj-card').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+    });
+
+    document.querySelectorAll('.projets-section').forEach(s => {
+      if (f === 'all') { s.style.display = ''; return; }
+      const visible = s.querySelectorAll(`.proj-card[data-cat="${f}"]`);
+      s.style.display = visible.length ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

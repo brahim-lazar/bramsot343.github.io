@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille Technologique — Brahim Lazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-global.css">
+<style>
+
+/* ══ SUJET ══ */
+.sujet-sec { padding: 6rem 0 7rem; background: var(--white); }
+.sujet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+.sujet-text p { color: var(--muted); line-height: 1.9; font-size: 1rem; margin-bottom: 1.1rem; }
+.sujet-text p strong { color: var(--ink); font-weight: 600; }
+.sujet-aside { display: flex; flex-direction: column; gap: 1rem; }
+.sujet-card { background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--r); padding: 1.4rem 1.6rem; border-left: 4px solid var(--teal); }
+.sujet-card-title { font-family: var(--font-display); font-size: 1rem; color: var(--ink); margin-bottom: .4rem; }
+.sujet-card-desc { font-size: .87rem; color: var(--muted); line-height: 1.7; }
+
+/* ══ DÉCOUVERTES ══ */
+.decouvertes-sec { padding: 6rem 0; background: var(--surface); }
+.dec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; margin-top: 3rem; }
+.dec-card { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--r-lg); overflow: hidden; transition: all .3s var(--ease); }
+.dec-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.08); border-color: transparent; }
+.dec-head { padding: 1.4rem 1.6rem 1rem; border-bottom: 1.5px solid var(--line); display: flex; align-items: center; gap: 1rem; }
+.dec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.dec-icon.blue   { background: rgba(67,97,238,.1); }
+.dec-icon.teal   { background: var(--teal-dim); }
+.dec-icon.amber  { background: rgba(245,158,11,.1); }
+.dec-icon.rose   { background: rgba(232,96,76,.1); }
+.dec-label { font-family: var(--font-mono); font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--subtle); margin-bottom: .25rem; }
+.dec-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); line-height: 1.25; }
+.dec-body { padding: 1.2rem 1.6rem 1.4rem; }
+.dec-body p { font-size: .9rem; color: var(--muted); line-height: 1.8; margin-bottom: .8rem; }
+.dec-body p strong { color: var(--ink); font-weight: 600; }
+.dec-example { background: var(--surface); border-radius: 8px; padding: .9rem 1.1rem; font-size: .84rem; color: var(--muted); line-height: 1.7; border-left: 3px solid var(--teal); margin-top: .8rem; }
+.dec-example strong { color: var(--ink); font-weight: 600; }
+
+
+
+/* ══ MÉTHODE ══ */
+.methode-sec { padding: 6rem 0; background: var(--surface); }
+.methode-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 3rem; }
+.ms { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--r); padding: 1.4rem; transition: all .3s var(--ease); }
+.ms:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,191,174,.08); }
+.ms-num { font-family: var(--font-mono); font-size: .65rem; font-weight: 700; letter-spacing: .12em; color: var(--teal); margin-bottom: .5rem; }
+.ms-icon { font-size: 1.4rem; margin-bottom: .5rem; }
+.ms-title { font-size: .92rem; font-weight: 600; color: var(--ink); margin-bottom: .4rem; line-height: 1.3; }
+.ms-desc { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+
+/* ══ SOURCES ══ */
+.sources-sec { padding: 6rem 0 8rem; background: var(--white); }
+.sources-intro { max-width: 680px; margin-bottom: 3rem; font-size: .97rem; color: var(--muted); line-height: 1.85; }
+.sources-intro strong { color: var(--ink); }
+.src-cat-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--teal); margin-bottom: 1rem; display: flex; align-items: center; gap: .7rem; }
+.src-cat-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.sources-group { margin-bottom: 2.8rem; }
+.sources-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: .8rem; }
+.vsource { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.3rem; background: var(--white); border: 1.5px solid var(--line); border-radius: 12px; text-decoration: none; transition: all .25s var(--ease); }
+.vsource:hover { background: var(--teal-dim); border-color: rgba(0,191,174,.35); transform: translateX(4px); }
+.vsource-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; border: 1px solid var(--line); }
+.vsource-name { font-size: .88rem; font-weight: 600; color: var(--ink); }
+.vsource-type { font-size: .72rem; color: var(--subtle); margin-top: .1rem; }
+
+@media(max-width:1024px) { .sujet-grid { grid-template-columns: 1fr; } .dec-grid { grid-template-columns: 1fr; } .enjeux-row { grid-template-columns: 1fr 1fr; } }
+@media(max-width:640px) { .enjeux-row { grid-template-columns: 1fr; } .methode-steps { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container">
+    <div class="page-hero-inner reveal">
+      <div class="page-hero-badge">Veille technologique — BTS SIO SISR</div>
+      <h1>L'IA au Service<br>de la <em>Santé</em></h1>
+      <p>Sujet suivi sur l'année 2024-2025 — applications concrètes, enjeux éthiques et réglementaires.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POURQUOI CE SUJET ══ -->
+<section class="sujet-sec">
+  <div class="container">
+    <div class="s-label reveal">Point de départ</div>
+    <h2 class="s-title reveal">Pourquoi ce sujet</h2>
+
+    <div class="sujet-grid">
+      <div class="sujet-text reveal">
+        <p>
+          J'ai choisi <strong>l'IA appliquée à la santé</strong> parce que c'est un sujet vivant — chaque semaine apporte de nouvelles avancées, des réglementations en construction et des débats ouverts. Pour une veille sur toute une année, c'était essentiel.
+        </p>
+        <p>
+          Ce domaine me permet aussi de couvrir <strong>trois angles différents</strong> : technique (comment ça marche), éthique (qui est responsable si ça se trompe), et réglementaire (l'AI Act européen, le RGPD). À l'oral, avoir plusieurs entrées sur le même sujet permet de répondre à des questions très variées.
+        </p>
+        <p>
+          Ce n'est pas de la science-fiction : des outils IA sont <strong>déjà déployés dans des hôpitaux français</strong>. J'ai donc pu distinguer ce qui est réellement en production de ce qui est encore en laboratoire.
+        </p>
+      </div>
+      <div class="sujet-aside reveal d2">
+        <div class="sujet-card">
+          <div class="sujet-card-title">🔄 Un sujet en mouvement constant</div>
+          <div class="sujet-card-desc">Nouvelles publications, essais cliniques, réglementations — le rythme permet une veille active toute l'année.</div>
+        </div>
+        <div class="sujet-card">
+          <div class="sujet-card-title">⚖️ Technique + Éthique + Réglementation</div>
+          <div class="sujet-card-desc">Trois axes complémentaires : algorithmes, biais/responsabilité, AI Act et RGPD données de santé.</div>
+        </div>
+        <div class="sujet-card">
+          <div class="sujet-card-title">🏥 Déjà déployé dans le réel</div>
+          <div class="sujet-card-desc">Des outils concrets utilisés en hôpital — pas des promesses, des faits documentés et vérifiables.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CE QUE J'AI DÉCOUVERT ══ -->
+<section class="decouvertes-sec">
+  <div class="container">
+    <div class="s-label reveal">Résultats de la veille</div>
+    <h2 class="s-title reveal">Ce que j'ai appris</h2>
+    <p class="s-sub reveal">Les quatre domaines que j'ai suivis tout au long de l'année, avec les avancées concrètes retenues.</p>
+
+    <div class="dec-grid">
+
+      <div class="dec-card reveal">
+        <div class="dec-head">
+          <div class="dec-icon blue">🩺</div>
+          <div>
+            <div class="dec-label">Domaine 01</div>
+            <div class="dec-title">Diagnostic médical assisté par IA</div>
+          </div>
+        </div>
+        <div class="dec-body">
+          <p>Des algorithmes de <strong>deep learning</strong> analysent des images médicales (radios, IRM, scanners) avec une précision égale ou supérieure à celle des radiologues sur certaines pathologies.</p>
+          <p>En France, des outils sont déjà en usage dans des CHU pour la détection de cancers du sein et de rétinopathies diabétiques.</p>
+          <div class="dec-example">
+            <strong>Exemple concret :</strong> L'algorithme Paige AI (FDA-approuvé) détecte le cancer de la prostate sur des lames de biopsie avec 70 % de réduction des faux négatifs par rapport à l'analyse humaine seule.
+            <a href="https://www.inserm.fr/dossier/intelligence-artificielle-et-sante/" target="_blank" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;font-size:.78rem;font-weight:700;color:var(--teal);text-decoration:none;padding:.25rem .7rem;border-radius:50px;border:1.5px solid rgba(0,191,174,.3);background:var(--teal-dim);transition:all .2s" onmouseover="this.style.background='var(--teal)';this.style.color='white'" onmouseout="this.style.background='var(--teal-dim)';this.style.color='var(--teal)'">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              INSERM — IA et santé
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dec-card reveal d1">
+        <div class="dec-head">
+          <div class="dec-icon teal">💊</div>
+          <div>
+            <div class="dec-label">Domaine 02</div>
+            <div class="dec-title">Découverte de médicaments</div>
+          </div>
+        </div>
+        <div class="dec-body">
+          <p>L'IA permet de <strong>réduire drastiquement le temps de recherche</strong> de nouvelles molécules thérapeutiques en simulant des milliards de combinaisons moléculaires en quelques heures.</p>
+          <p>Ce qui prenait 10 à 15 ans de recherche traditionnelle peut être réduit à quelques mois pour la phase de criblage initial.</p>
+          <div class="dec-example">
+            <strong>Exemple concret :</strong> DeepMind (AlphaFold) a prédit la structure de plus de 200 millions de protéines — un problème non résolu depuis 50 ans. Cela ouvre la voie à des traitements pour des maladies rares jusqu'ici sans solution.
+            <a href="https://alphafold.ebi.ac.uk" target="_blank" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;font-size:.78rem;font-weight:700;color:var(--teal);text-decoration:none;padding:.25rem .7rem;border-radius:50px;border:1.5px solid rgba(0,191,174,.3);background:var(--teal-dim);transition:all .2s" onmouseover="this.style.background='var(--teal)';this.style.color='white'" onmouseout="this.style.background='var(--teal-dim)';this.style.color='var(--teal)'">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              AlphaFold Database — EBI
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dec-card reveal">
+        <div class="dec-head">
+          <div class="dec-icon amber">🤖</div>
+          <div>
+            <div class="dec-label">Domaine 03</div>
+            <div class="dec-title">Chirurgie assistée et médecine prédictive</div>
+          </div>
+        </div>
+        <div class="dec-body">
+          <p>Les robots chirurgicaux guidés par IA (da Vinci, Mako) permettent des gestes plus précis, moins invasifs, avec une récupération post-opératoire accélérée. En médecine prédictive, l'IA anticipe les risques avant l'apparition des symptômes.</p>
+          <p>En France, le robot Mako est utilisé dans plusieurs cliniques pour les prothèses de genou et de hanche.</p>
+          <div class="dec-example">
+            <strong>Exemple concret :</strong> Des modèles prédictifs utilisés aux États-Unis détectent le risque de sepsis 6 heures avant les signes cliniques, réduisant la mortalité de 20 %.
+            <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2781307" target="_blank" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;font-size:.78rem;font-weight:700;color:var(--teal);text-decoration:none;padding:.25rem .7rem;border-radius:50px;border:1.5px solid rgba(0,191,174,.3);background:var(--teal-dim);transition:all .2s" onmouseover="this.style.background='var(--teal)';this.style.color='white'" onmouseout="this.style.background='var(--teal-dim)';this.style.color='var(--teal)'">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              JAMA Internal Medicine
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dec-card reveal d1">
+        <div class="dec-head">
+          <div class="dec-icon rose">⚖️</div>
+          <div>
+            <div class="dec-label">Domaine 04</div>
+            <div class="dec-title">Éthique et protection des données</div>
+          </div>
+        </div>
+        <div class="dec-body">
+          <p>L'IA médicale soulève des questions fondamentales : <strong>qui est responsable si l'algorithme se trompe ?</strong> Les données de santé sont parmi les plus sensibles — leur traitement est encadré par le RGPD et surveillé par la CNIL.</p>
+          <p>Le risque de biais algorithmique est documenté : certains modèles entraînés sur des données majoritairement occidentales sont moins précis pour d'autres populations.</p>
+          <div class="dec-example">
+            <strong>Exemple concret :</strong> L'AI Act européen (entré en vigueur en 2024) classe les IA médicales en "haut risque" — elles doivent être auditées, transparentes et expliquables avant tout déploiement.
+            <a href="https://health.ec.europa.eu/ehealth-digital-health-and-care/artificial-intelligence-healthcare_fr" target="_blank" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;font-size:.78rem;font-weight:700;color:var(--teal);text-decoration:none;padding:.25rem .7rem;border-radius:50px;border:1.5px solid rgba(0,191,174,.3);background:var(--teal-dim);transition:all .2s" onmouseover="this.style.background='var(--teal)';this.style.color='white'" onmouseout="this.style.background='var(--teal-dim)';this.style.color='var(--teal)'">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Commission Européenne — AI Act
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ MÉTHODE ══ -->
+<section class="methode-sec">
+  <div class="container">
+    <div class="s-label reveal">Comment j'ai travaillé</div>
+    <h2 class="s-title reveal">Ma méthode en 4 étapes</h2>
+
+    <div class="methode-steps">
+      <div class="ms reveal">
+        <div class="ms-num">01</div>
+        <div class="ms-icon">🔍</div>
+        <div class="ms-title">Délimiter le sujet</div>
+        <div class="ms-desc">4 domaines identifiés dès le départ : diagnostic, chirurgie, médicaments, éthique. Pour ne pas me disperser.</div>
+      </div>
+      <div class="ms reveal d1">
+        <div class="ms-num">02</div>
+        <div class="ms-icon">📡</div>
+        <div class="ms-title">Alertes automatiques</div>
+        <div class="ms-desc">Google Alertes configurées sur mes mots-clés. Flux RSS de l'INSERM et de la Commission Européenne.</div>
+      </div>
+      <div class="ms reveal d2">
+        <div class="ms-num">03</div>
+        <div class="ms-icon">📚</div>
+        <div class="ms-title">Lecture hebdomadaire</div>
+        <div class="ms-desc">Sources consultées 1× par semaine : INSERM, OMS, presse spécialisée. Routine : lundi alertes, mercredi lecture longue.</div>
+      </div>
+      <div class="ms reveal d3">
+        <div class="ms-num">04</div>
+        <div class="ms-icon">🧩</div>
+        <div class="ms-title">Recoupement systématique</div>
+        <div class="ms-desc">Une info retenue uniquement si 2 sources indépendantes la confirment. Évite les annonces marketing sans preuve.</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOURCES ══ -->
+<section class="sources-sec">
+  <div class="container">
+    <div class="s-label reveal">Références</div>
+    <h2 class="s-title reveal">Sources consultées</h2>
+    <p class="sources-intro reveal">10 sources réparties en 3 catégories : <strong>institutionnelles</strong> pour la rigueur scientifique, <strong>presse spécialisée</strong> pour le contexte industriel, <strong>réglementaires</strong> pour le cadre légal.</p>
+
+    <div class="sources-group reveal">
+      <div class="src-cat-label">🔬 Institutionnelles &amp; scientifiques</div>
+      <div class="sources-list">
+        <a href="https://www.inserm.fr/dossier/intelligence-artificielle-et-sante/" target="_blank" class="vsource">
+          <div class="vsource-icon">🔬</div>
+          <div><div class="vsource-name">INSERM</div><div class="vsource-type">Institut national de la santé et de la recherche médicale</div></div>
+        </a>
+        <a href="https://www.who.int/health-topics/artificial-intelligence" target="_blank" class="vsource">
+          <div class="vsource-icon">🌍</div>
+          <div><div class="vsource-name">OMS — WHO</div><div class="vsource-type">Organisation Mondiale de la Santé · Dimension internationale</div></div>
+        </a>
+        <a href="https://fr.wikipedia.org/wiki/Intelligence_artificielle_dans_la_sant%C3%A9" target="_blank" class="vsource">
+          <div class="vsource-icon">📖</div>
+          <div><div class="vsource-name">Wikipedia — IA dans la santé</div><div class="vsource-type">Point d'entrée et liens vers sources primaires</div></div>
+        </a>
+        <a href="https://www.has-sante.fr" target="_blank" class="vsource">
+          <div class="vsource-icon">🏥</div>
+          <div><div class="vsource-name">HAS — Haute Autorité de Santé</div><div class="vsource-type">Évaluation des outils IA médicaux en France</div></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sources-group reveal">
+      <div class="src-cat-label">📰 Presse spécialisée &amp; innovation</div>
+      <div class="sources-list">
+        <a href="https://bigmedia.bpifrance.fr" target="_blank" class="vsource">
+          <div class="vsource-icon">🏦</div>
+          <div><div class="vsource-name">BPI France Big Média</div><div class="vsource-type">Cas d'usage entreprises françaises</div></div>
+        </a>
+        <a href="https://www.medaviz.com" target="_blank" class="vsource">
+          <div class="vsource-icon">📰</div>
+          <div><div class="vsource-name">Medaviz</div><div class="vsource-type">Presse santé numérique · Perspective terrain</div></div>
+        </a>
+        <a href="https://medecine-connectee.fr" target="_blank" class="vsource">
+          <div class="vsource-icon">💻</div>
+          <div><div class="vsource-name">Médecine Connectée</div><div class="vsource-type">Déploiements réels en milieu hospitalier</div></div>
+        </a>
+        <a href="https://esante.gouv.fr" target="_blank" class="vsource">
+          <div class="vsource-icon">🇫🇷</div>
+          <div><div class="vsource-name">ANS — e-santé.gouv.fr</div><div class="vsource-type">Stratégie nationale e-santé · Programmes IA-santé France</div></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sources-group reveal">
+      <div class="src-cat-label">⚖️ Réglementaires &amp; juridiques</div>
+      <div class="sources-list">
+        <a href="https://health.ec.europa.eu/ehealth-digital-health-and-care/artificial-intelligence-healthcare_fr" target="_blank" class="vsource">
+          <div class="vsource-icon">🇪🇺</div>
+          <div><div class="vsource-name">Commission Européenne — e-Health</div><div class="vsource-type">AI Act · Encadrement IA médicale</div></div>
+        </a>
+        <a href="https://www.cnil.fr/fr/intelligence-artificielle" target="_blank" class="vsource">
+          <div class="vsource-icon">🔐</div>
+          <div><div class="vsource-name">CNIL — Intelligence artificielle</div><div class="vsource-type">RGPD &amp; protection des données de santé</div></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="shared.js"></script>
+</body>
+</html>
